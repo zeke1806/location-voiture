@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
-import {Button, View} from 'react-native';
+import {View} from 'react-native';
 import tailwind from 'tailwind-rn';
 import themes from '../../theme';
 import MyTextInput from '../public/MyTextInput';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SearchVoiture: FC = () => {
   return (
@@ -11,9 +12,9 @@ const SearchVoiture: FC = () => {
         <MyTextInput placeholder="Recherche numero/designation" value={''} />
       </View>
       <View style={tailwind('justify-center')}>
-        <Button
-          onPress={function () {}}
-          title="Rechercher"
+        <Ionicons
+          name="search"
+          size={themes.space * 2}
           color={themes.colors.secondary}
         />
       </View>
