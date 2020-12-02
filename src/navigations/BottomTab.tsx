@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import LocataireScreen from '../screens/Locataire';
 import VoitureScreen from '../screens/Voiture';
 import LocationScreen from '../screens/Location';
 import themes from '../theme';
+import LocataireStack from './LocataireStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +29,11 @@ const BottomTab: FC = () => {
           justifyContent: 'center',
         },
       }}>
-      <Tab.Screen name="locataire" component={LocataireScreen} />
+      <Tab.Screen
+        name="locataire-stack"
+        component={LocataireStack}
+        options={{tabBarLabel: 'LOCATAIRE'}}
+      />
       <Tab.Screen name="voiture" component={VoitureScreen} />
       <Tab.Screen name="location" component={LocationScreen} />
     </Tab.Navigator>
