@@ -66,7 +66,7 @@ const ListVoiture: FC = () => {
 
   return (
     <View>
-      <SectionTitle iconName="list" text="Liste de locataire" />
+      <SectionTitle iconName="list" text="Liste de voiture" />
       <FlatList
         data={DATA}
         renderItem={renderItem}
