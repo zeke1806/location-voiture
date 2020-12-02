@@ -14,7 +14,7 @@ const VoitureScreen: FC = () => {
       <Space />
       <SearchVoiture />
       <Space />
-      <ListVoiture />
+      <ListVoiture modeLocation={false} />
     </PageContainer>
   );
 };

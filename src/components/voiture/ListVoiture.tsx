@@ -26,7 +26,8 @@ const DATA = [
 
 const ListItem: FC<{
   item: typeof DATA[0];
-}> = ({item}) => {
+  modeLocation: boolean;
+}> = ({item, modeLocation}) => {
   const navigation = useNavigation();
 
   const navigateToUpdate = () => {
@@ -49,19 +50,33 @@ const ListItem: FC<{
           <Text>Loyer journalier: {item.lj}</Text>
         </View>
       </View>
-      <Ionicons
-        name="trash-outline"
-        size={themes.space * 2}
-        style={tailwind('mr-5')}
-        color="red"
-      />
+      {!modeLocation ? (
+        <Ionicons
+          name="trash-outline"
+          size={themes.space * 2}
+          style={tailwind('mr-5')}
+          color="red"
+        />
+      ) : (
+        <View>
+          <View
+            style={[
+              tailwind('p-2 rounded-full border-opacity-0'),
+              {backgroundColor: themes.colors.secondary},
+            ]}>
+            <Text style={tailwind('text-white font-bold')}>Nb location: 0</Text>
+          </View>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
 
-const ListVoiture: FC = () => {
+const ListVoiture: FC<{
+  modeLocation: boolean;
+}> = ({modeLocation}) => {
   const renderItem = ({item}: {item: typeof DATA[0]}) => {
-    return <ListItem item={item} />;
+    return <ListItem item={item} modeLocation={modeLocation} />;
   };
 
   return (
