@@ -11,9 +11,7 @@ const FormLocataire: FC<{
     <View>
       <SectionTitle
         iconName={type === 'add' ? 'add' : 'pencil'}
-        text={
-          type === 'add' ? 'Ajout de locataire' : 'Modification du locataire'
-        }
+        text={type === 'add' ? 'Ajout de locataire' : 'Modifier le locataire'}
       />
       <View>
         <MyTextInput value="" placeholder="Nom" />

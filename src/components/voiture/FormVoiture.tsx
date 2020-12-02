@@ -11,7 +11,7 @@ const FormVoiture: FC<{
     <View>
       <SectionTitle
         iconName={type === 'add' ? 'add' : 'pencil'}
-        text={type === 'add' ? 'Ajout de voiture' : 'Modification de voiture'}
+        text={type === 'add' ? 'Ajout de voiture' : 'Modifier la voiture'}
       />
       <View>
         <MyTextInput value="" placeholder="Designation" />

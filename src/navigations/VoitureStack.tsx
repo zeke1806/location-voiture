@@ -1,21 +1,21 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import UpdateLocataireScreen from '../screens/UpdateLocataire';
-import LocataireScreen from '../screens/Locataire';
+import UpdateVoitureScreen from '../screens/UpdateVoiture';
+import VoitureScreen from '../screens/Voiture';
 
 const Stack = createStackNavigator();
 
-const LocataireStack = () => {
+const VoitureStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="home-locataire"
-        component={LocataireScreen}
+        name="home-voiture"
+        component={VoitureScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="update-locataire"
-        component={UpdateLocataireScreen}
+        name="update-voiture"
+        component={UpdateVoitureScreen}
         options={{
           headerTitle: 'Modification',
         }}
@@ -24,4 +24,4 @@ const LocataireStack = () => {
   );
 };
 
-export default LocataireStack;
+export default VoitureStack;
