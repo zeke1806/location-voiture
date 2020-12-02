@@ -11,10 +11,6 @@ const Tab = createBottomTabNavigator();
 const BottomTab: FC = () => {
   return (
     <Tab.Navigator
-      // eslint-disable-next-line react-native/no-inline-styles
-      sceneContainerStyle={{
-        backgroundColor: '#fff',
-      }}
       tabBarOptions={{
         keyboardHidesTabBar: true,
         inactiveBackgroundColor: themes.colors.primary,

@@ -16,7 +16,9 @@ const LocataireStack = () => {
       <Stack.Screen
         name="update-locataire"
         component={UpdateLocataireScreen}
-        options={{headerTitle: 'Modifier le locataire'}}
+        options={{
+          headerTitle: 'Modifier le locataire',
+        }}
       />
     </Stack.Navigator>
   );
