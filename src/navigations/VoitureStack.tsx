@@ -17,7 +17,7 @@ const VoitureStack = () => {
         name="update-voiture"
         component={UpdateVoitureScreen}
         options={{
-          headerTitle: 'Modification',
+          headerTitle: 'Modification voiture',
         }}
       />
     </Stack.Navigator>

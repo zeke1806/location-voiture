@@ -40,14 +40,14 @@ const FormLocation: FC<{
                 keyboardType="numeric"
               />
             </View>
-            <Text style={tailwind('flex-1')}>
+            <Text style={tailwind('flex-1 text-center')}>
               <Ionicons
                 name="calendar"
-                size={themes.space * 2}
+                size={themes.space * 3}
                 onPress={() => setShowDate(true)}
               />
               {'    '}
-              {'date de location'}
+              {'Date de location'}
             </Text>
             {showDate && (
               <DateTimePicker

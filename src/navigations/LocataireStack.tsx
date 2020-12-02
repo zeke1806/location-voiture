@@ -17,7 +17,7 @@ const LocataireStack = () => {
         name="update-locataire"
         component={UpdateLocataireScreen}
         options={{
-          headerTitle: 'Modification',
+          headerTitle: 'Modification locataire',
         }}
       />
     </Stack.Navigator>
