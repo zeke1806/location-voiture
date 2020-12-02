@@ -16,10 +16,11 @@ const BottomTab: FC = () => {
         backgroundColor: '#fff',
       }}
       tabBarOptions={{
+        keyboardHidesTabBar: true,
         inactiveBackgroundColor: themes.colors.primary,
         activeBackgroundColor: themes.colors.primary,
-        activeTintColor: themes.colors.secondary,
-        inactiveTintColor: '#fff',
+        activeTintColor: '#fff',
+        inactiveTintColor: 'black',
         labelStyle: {
           fontSize: themes.space,
           textTransform: 'uppercase',
