@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import LocationScreen from '../screens/Location';
 import themes from '../theme';
 import LocataireStack from './LocataireStack';
 import VoitureStack from './VoitureStack';
+import LocationStack from './LocationStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,11 @@ const BottomTab: FC = () => {
         component={VoitureStack}
         options={{tabBarLabel: 'VOITURE'}}
       />
-      <Tab.Screen name="location" component={LocationScreen} />
+      <Tab.Screen
+        name="location-stack"
+        component={LocationStack}
+        options={{tabBarLabel: 'LOCATION'}}
+      />
     </Tab.Navigator>
   );
 };

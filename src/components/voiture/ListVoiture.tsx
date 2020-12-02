@@ -31,7 +31,11 @@ const ListItem: FC<{
   const navigation = useNavigation();
 
   const navigateToUpdate = () => {
-    navigation.navigate('update-voiture');
+    if (!modeLocation) {
+      navigation.navigate('update-voiture');
+    } else {
+      navigation.navigate('manage-location');
+    }
   };
 
   return (
