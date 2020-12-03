@@ -1,18 +1,16 @@
 import React, {FC, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, View} from 'react-native';
 import SectionTitle from '../../components/public/SectionTitle';
 import themes from '../../theme';
 import {Picker} from '@react-native-picker/picker';
 import MyTextInput from '../public/MyTextInput';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from '../public/DatePicker';
 
 const FormLocation: FC<{
   type: 'add' | 'update';
 }> = ({type}) => {
   const [state, setState] = useState('Rakoto');
-  const [showDate, setShowDate] = useState(false);
 
   return (
     <View>
@@ -40,26 +38,9 @@ const FormLocation: FC<{
                 keyboardType="numeric"
               />
             </View>
-            <Text style={tailwind('flex-1 text-center')}>
-              <Ionicons
-                name="calendar"
-                size={themes.space * 3}
-                onPress={() => setShowDate(true)}
-              />
-              {'    '}
-              {'Date de location'}
-            </Text>
-            {showDate && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={new Date()}
-                is24Hour={true}
-                display="default"
-                onChange={function () {
-                  setShowDate(false);
-                }}
-              />
-            )}
+            <View style={tailwind('flex-1')}>
+              <DatePicker placeholder="Date de location" />
+            </View>
           </View>
         </View>
 

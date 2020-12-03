@@ -5,7 +5,7 @@ import themes from '../../theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SectionTitle: FC<{
-  iconName: 'add' | 'list' | 'pencil';
+  iconName: 'add' | 'list' | 'pencil' | 'people-sharp' | 'cash';
   text: string;
 }> = ({iconName, text}) => {
   return (

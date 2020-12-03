@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ManageLocationScreen from '../screens/ManageLocation';
 import LocationScreen from '../screens/Location';
 import UpdateLocationScreen from '../screens/UpdateLocation';
+import StatLocationScreen from '../screens/StatLocation';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,13 @@ const LocationStack = () => {
         component={UpdateLocationScreen}
         options={{
           headerTitle: 'Modification location',
+        }}
+      />
+      <Stack.Screen
+        name="stat-location"
+        component={StatLocationScreen}
+        options={{
+          headerTitle: 'Statistique de location pour une voiture',
         }}
       />
     </Stack.Navigator>
