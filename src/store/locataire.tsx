@@ -1,11 +1,6 @@
 import React, {createContext, FC, useContext} from 'react';
 import {useImmer} from 'use-immer';
-
-interface ILocataire {
-  num: number;
-  nom: string;
-  adresse: string;
-}
+import {ILocataire} from '../types';
 
 interface IState {
   locataires: ILocataire[];

@@ -3,29 +3,14 @@ import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useGetLocataires} from '../../services/getLocataires';
+import {useLocataireCtx} from '../../store/locataire';
 import themes from '../../theme';
+import {ILocataire} from '../../types';
 import SectionTitle from '../public/SectionTitle';
 
-const DATA = [
-  {
-    numLocataire: '123',
-    nom: 'Fil',
-    adresse: 'tanambao',
-  },
-  {
-    numLocataire: '456',
-    nom: 'Filibert',
-    adresse: 'ampasambazaha',
-  },
-  {
-    numLocataire: '789',
-    nom: 'Teo',
-    adresse: 'Ampitatafika',
-  },
-];
-
 const ListItem: FC<{
-  item: typeof DATA[0];
+  item: ILocataire;
 }> = ({item}) => {
   const navigation = useNavigation();
 
@@ -44,7 +29,7 @@ const ListItem: FC<{
           style={tailwind('mr-5')}
         />
         <View>
-          <Text>Numero: {item.numLocataire}</Text>
+          <Text>Numero: {item.idLocataire}</Text>
           <Text>Nom: {item.nom}</Text>
           <Text>Adresse: {item.adresse}</Text>
         </View>
@@ -60,7 +45,10 @@ const ListItem: FC<{
 };
 
 const ListLocataire: FC = () => {
-  const renderItem = ({item}: {item: typeof DATA[0]}) => {
+  useGetLocataires();
+  const {state} = useLocataireCtx();
+
+  const renderItem = ({item}: {item: ILocataire}) => {
     return <ListItem item={item} />;
   };
 
@@ -68,9 +56,9 @@ const ListLocataire: FC = () => {
     <View>
       <SectionTitle iconName="list" text="Liste de locataire" />
       <FlatList
-        data={DATA}
+        data={state.locataires}
         renderItem={renderItem}
-        keyExtractor={(item) => item.numLocataire}
+        keyExtractor={(item) => String(item.idLocataire)}
       />
     </View>
   );
