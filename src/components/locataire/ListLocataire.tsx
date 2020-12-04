@@ -15,7 +15,7 @@ const ListItem: FC<{
   const navigation = useNavigation();
 
   const navigateToUpdate = () => {
-    navigation.navigate('update-locataire');
+    navigation.navigate('update-locataire', item);
   };
 
   return (

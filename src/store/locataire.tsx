@@ -9,6 +9,7 @@ interface IState {
 interface IActions {
   setLocataires: (locataires: ILocataire[]) => void;
   addLocataires: (locataire: ILocataire) => void;
+  updateLocataire: (id: number, data: ILocataire) => void;
 }
 
 interface IContext {
@@ -31,9 +32,20 @@ export const LocataireProvider: FC = ({children}) => {
           draft.locataires = locataires;
         });
       },
+
       addLocataires(locataire) {
         setState((draft) => {
           draft.locataires.unshift(locataire);
+        });
+      },
+
+      updateLocataire(id, data) {
+        setState((draft) => {
+          draft.locataires.forEach((l) => {
+            if (String(l.idLocataire) === String(id)) {
+              Object.assign(l, data);
+            }
+          });
         });
       },
     },
