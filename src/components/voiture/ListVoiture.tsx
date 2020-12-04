@@ -3,29 +3,14 @@ import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useGetVoitures} from '../../services/getVoitures';
+import {useVoitureCtx} from '../../store/voiture';
 import themes from '../../theme';
+import {IVoiture} from '../../types';
 import SectionTitle from '../public/SectionTitle';
 
-const DATA = [
-  {
-    numVoiture: '123',
-    designation: 'Dodge',
-    lj: '2M',
-  },
-  {
-    numVoiture: '456',
-    designation: 'Ferrari',
-    lj: '2M',
-  },
-  {
-    numVoiture: '789',
-    designation: 'Nissan',
-    lj: '2M',
-  },
-];
-
 const ListItem: FC<{
-  item: typeof DATA[0];
+  item: IVoiture;
   modeLocation: boolean;
 }> = ({item, modeLocation}) => {
   const navigation = useNavigation();
@@ -49,9 +34,9 @@ const ListItem: FC<{
           style={tailwind('mr-5')}
         />
         <View>
-          <Text>Numero: {item.numVoiture}</Text>
+          <Text>Numero: {item.idVoiture}</Text>
           <Text>Designation: {item.designation}</Text>
-          <Text>Loyer journalier: {item.lj}</Text>
+          <Text>Loyer journalier: {item.loyer}Ar</Text>
         </View>
       </View>
       {!modeLocation ? (
@@ -79,7 +64,10 @@ const ListItem: FC<{
 const ListVoiture: FC<{
   modeLocation: boolean;
 }> = ({modeLocation}) => {
-  const renderItem = ({item}: {item: typeof DATA[0]}) => {
+  useGetVoitures();
+  const {state} = useVoitureCtx();
+
+  const renderItem = ({item}: {item: IVoiture}) => {
     return <ListItem item={item} modeLocation={modeLocation} />;
   };
 
@@ -87,9 +75,9 @@ const ListVoiture: FC<{
     <View>
       <SectionTitle iconName="list" text="Liste de voiture" />
       <FlatList
-        data={DATA}
+        data={state.voitures}
         renderItem={renderItem}
-        keyExtractor={(item) => item.numVoiture}
+        keyExtractor={(item) => String(item.idVoiture)}
       />
     </View>
   );

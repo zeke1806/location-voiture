@@ -1,5 +1,6 @@
 import React, {createContext, FC, useContext} from 'react';
 import {useImmer} from 'use-immer';
+import {STORE_ERROR_MESSAGE} from '../configs';
 import {ILocataire} from '../types';
 
 interface IState {
@@ -69,7 +70,7 @@ export const LocataireProvider: FC = ({children}) => {
 export const useLocataireCtx = () => {
   const context = useContext(Context);
   if (!context) {
-    throw 'useLocataireCtx cannot be used outside LocataireProvider';
+    throw STORE_ERROR_MESSAGE('Locataire');
   }
   return context;
 };

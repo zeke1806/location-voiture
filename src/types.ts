@@ -5,3 +5,9 @@ export interface ILocataire {
 }
 
 export type IFormLocataire = Omit<ILocataire, 'idLocataire'>;
+
+export interface IVoiture {
+  idVoiture: number;
+  designation: string;
+  loyer: number;
+}
