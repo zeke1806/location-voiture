@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useDeleteLocataire} from '../../services/deleteLocataire';
 import {useGetLocataires} from '../../services/getLocataires';
 import {useLocataireCtx} from '../../store/locataire';
 import themes from '../../theme';
@@ -13,6 +14,7 @@ const ListItem: FC<{
   item: ILocataire;
 }> = ({item}) => {
   const navigation = useNavigation();
+  const {submit} = useDeleteLocataire(item.idLocataire);
 
   const navigateToUpdate = () => {
     navigation.navigate('update-locataire', item);
@@ -39,6 +41,7 @@ const ListItem: FC<{
         size={themes.space * 2}
         style={tailwind('mr-5')}
         color="red"
+        onPress={submit}
       />
     </TouchableOpacity>
   );

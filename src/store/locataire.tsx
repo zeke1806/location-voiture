@@ -9,7 +9,8 @@ interface IState {
 interface IActions {
   setLocataires: (locataires: ILocataire[]) => void;
   addLocataires: (locataire: ILocataire) => void;
-  updateLocataire: (id: number, data: ILocataire) => void;
+  updateLocataire: (id: string, data: ILocataire) => void;
+  deleteLocataire: (id: number) => void;
 }
 
 interface IContext {
@@ -46,6 +47,17 @@ export const LocataireProvider: FC = ({children}) => {
               Object.assign(l, data);
             }
           });
+        });
+      },
+
+      deleteLocataire(id) {
+        setState((draft) => {
+          draft.locataires.splice(
+            draft.locataires.findIndex(
+              (elt) => String(elt.idLocataire) === String(id),
+            ),
+            1,
+          );
         });
       },
     },
