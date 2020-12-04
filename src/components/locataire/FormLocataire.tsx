@@ -3,10 +3,14 @@ import {Button, View} from 'react-native';
 import MyTextInput from '../../components/public/MyTextInput';
 import SectionTitle from '../../components/public/SectionTitle';
 import themes from '../../theme';
+import {IFormLocataire} from '../../types';
 
 const FormLocataire: FC<{
   type: 'add' | 'update';
-}> = ({type}) => {
+  value: IFormLocataire;
+  onChange: (key: keyof IFormLocataire, value: string) => void;
+  submit: () => void;
+}> = ({type, value, onChange, submit}) => {
   return (
     <View>
       <SectionTitle
@@ -14,10 +18,18 @@ const FormLocataire: FC<{
         text={type === 'add' ? 'Ajout de locataire' : 'Modifier le locataire'}
       />
       <View>
-        <MyTextInput value="" placeholder="Nom" />
-        <MyTextInput value="" placeholder="Adresse" />
+        <MyTextInput
+          value={value.nom}
+          placeholder="Nom"
+          onChange={(text) => onChange('nom', text)}
+        />
+        <MyTextInput
+          value={value.adresse}
+          placeholder="Adresse"
+          onChange={(text) => onChange('adresse', text)}
+        />
         <Button
-          onPress={function () {}}
+          onPress={submit}
           title={type === 'add' ? 'ajouter' : 'modifier'}
           color={themes.colors.secondary}
         />

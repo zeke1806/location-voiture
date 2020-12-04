@@ -53,14 +53,14 @@ const ListLocataire: FC = () => {
   };
 
   return (
-    <View>
+    <>
       <SectionTitle iconName="list" text="Liste de locataire" />
       <FlatList
         data={state.locataires}
         renderItem={renderItem}
         keyExtractor={(item) => String(item.idLocataire)}
       />
-    </View>
+    </>
   );
 };
 

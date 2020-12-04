@@ -8,6 +8,7 @@ interface IState {
 
 interface IActions {
   setLocataires: (locataires: ILocataire[]) => void;
+  addLocataires: (locataire: ILocataire) => void;
 }
 
 interface IContext {
@@ -28,6 +29,11 @@ export const LocataireProvider: FC = ({children}) => {
       setLocataires(locataires) {
         setState((draft) => {
           draft.locataires = locataires;
+        });
+      },
+      addLocataires(locataire) {
+        setState((draft) => {
+          draft.locataires.unshift(locataire);
         });
       },
     },

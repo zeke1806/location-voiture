@@ -6,7 +6,8 @@ const MyTextInput: FC<{
   placeholder: string;
   value: string;
   keyboardType?: 'default' | 'numeric';
-}> = ({placeholder, value, keyboardType}) => {
+  onChange: (value: string) => void;
+}> = ({placeholder, value, keyboardType, onChange}) => {
   const _keyboardType = keyboardType || 'default';
   return (
     <TextInput
@@ -16,6 +17,7 @@ const MyTextInput: FC<{
         'border-2 rounded-md border-gray-500 border-opacity-50 pl-4 m-1',
       )}
       keyboardType={_keyboardType}
+      onChangeText={onChange}
     />
   );
 };

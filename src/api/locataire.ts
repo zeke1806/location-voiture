@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../configs';
+import {IFormLocataire} from '../types';
 
 const URL = BASE_URL + '/locataire';
 
@@ -11,19 +12,11 @@ export const getLocataireById = (id: number) => {
   return axios.get(`${URL}/${id}`);
 };
 
-export interface ICreateLocataireData {
-  nom: string;
-  adresse: string;
-}
-export const createLocataire = (data: ICreateLocataireData) => {
+export const createLocataire = (data: IFormLocataire) => {
   return axios.post(`${URL}`, data);
 };
 
-export interface IUpdateLocataireData {
-  nom: string;
-  adresse: string;
-}
-export const updateLocataire = (id: number, data: IUpdateLocataireData) => {
+export const updateLocataire = (id: number, data: IFormLocataire) => {
   return axios.put(`${URL}/${id}`, data);
 };
 

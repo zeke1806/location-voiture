@@ -3,3 +3,5 @@ export interface ILocataire {
   nom: string;
   adresse: string;
 }
+
+export type IFormLocataire = Omit<ILocataire, 'idLocataire'>;
