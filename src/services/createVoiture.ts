@@ -23,6 +23,10 @@ export const useCreateVoiture = () => {
       if (key === 'loyer') {
         draft.loyer = Number(value);
       }
+      setForm((draft) => {
+        draft.loyer = 0;
+        draft.designation = '';
+      });
     });
   };
 

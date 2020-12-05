@@ -10,6 +10,7 @@ interface IState {
 interface IActions {
   setVoitures: (voitures: IVoiture[]) => void;
   addVoiture: (voiture: IVoiture) => void;
+  updateVoiture: (voiture: IVoiture) => void;
 }
 
 interface IContext {
@@ -35,6 +36,17 @@ export const VoitureProvider: FC = ({children}) => {
       addVoiture(voiture) {
         setState((draft) => {
           draft.voitures.unshift(voiture);
+        });
+      },
+      updateVoiture(voiture) {
+        setState((draft) => {
+          draft.voitures.splice(
+            draft.voitures.findIndex(
+              (elt) => String(elt.idVoiture) === String(voiture.idVoiture),
+            ),
+            1,
+            voiture,
+          );
         });
       },
     },
