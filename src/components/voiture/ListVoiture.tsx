@@ -65,7 +65,7 @@ const ListVoiture: FC<{
   modeLocation: boolean;
 }> = ({modeLocation}) => {
   useGetVoitures();
-  const {state} = useVoitureCtx();
+  const {filteredVoitures} = useVoitureCtx();
 
   const renderItem = ({item}: {item: IVoiture}) => {
     return <ListItem item={item} modeLocation={modeLocation} />;
@@ -75,7 +75,7 @@ const ListVoiture: FC<{
     <>
       <SectionTitle iconName="list" text="Liste de voiture" />
       <FlatList
-        data={state.voitures}
+        data={filteredVoitures}
         renderItem={renderItem}
         keyExtractor={(item) => String(item.idVoiture)}
       />

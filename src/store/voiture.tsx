@@ -5,12 +5,14 @@ import {IVoiture} from '../types';
 
 interface IState {
   voitures: IVoiture[];
+  search: string;
 }
 
 interface IActions {
   setVoitures: (voitures: IVoiture[]) => void;
   addVoiture: (voiture: IVoiture) => void;
   updateVoiture: (voiture: IVoiture) => void;
+  handleChangeSearch: (search: string) => void;
 }
 
 interface IContext {
@@ -23,6 +25,7 @@ const Context = createContext<IContext | undefined>(undefined);
 export const VoitureProvider: FC = ({children}) => {
   const [state, setState] = useImmer<IState>({
     voitures: [],
+    search: '',
   });
 
   const contextValue: IContext = {
@@ -33,11 +36,13 @@ export const VoitureProvider: FC = ({children}) => {
           draft.voitures = voitures;
         });
       },
+
       addVoiture(voiture) {
         setState((draft) => {
           draft.voitures.unshift(voiture);
         });
       },
+
       updateVoiture(voiture) {
         setState((draft) => {
           draft.voitures.splice(
@@ -47,6 +52,12 @@ export const VoitureProvider: FC = ({children}) => {
             1,
             voiture,
           );
+        });
+      },
+
+      handleChangeSearch(search) {
+        setState((draft) => {
+          draft.search = search;
         });
       },
     },
@@ -60,5 +71,18 @@ export const useVoitureCtx = () => {
   if (!context) {
     throw STORE_ERROR_MESSAGE('Voiture');
   }
-  return context;
+
+  const filteredVoitures = context.state.search
+    ? context.state.voitures.filter((v) => {
+        return (
+          String(v.idVoiture).includes(context.state.search) ||
+          v.designation.includes(context.state.search)
+        );
+      })
+    : context.state.voitures;
+
+  return {
+    ...context,
+    filteredVoitures,
+  };
 };
