@@ -72,14 +72,14 @@ const ListVoiture: FC<{
   };
 
   return (
-    <View>
+    <>
       <SectionTitle iconName="list" text="Liste de voiture" />
       <FlatList
         data={state.voitures}
         renderItem={renderItem}
         keyExtractor={(item) => String(item.idVoiture)}
       />
-    </View>
+    </>
   );
 };
 

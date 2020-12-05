@@ -3,10 +3,14 @@ import {Button, View} from 'react-native';
 import MyTextInput from '../../components/public/MyTextInput';
 import SectionTitle from '../../components/public/SectionTitle';
 import themes from '../../theme';
+import {IFormVoiture} from '../../types';
 
 const FormVoiture: FC<{
   type: 'add' | 'update';
-}> = ({type}) => {
+  value: IFormVoiture;
+  onChange: (key: keyof IFormVoiture, value: string) => void;
+  submit: () => void;
+}> = ({type, value, onChange, submit}) => {
   return (
     <View>
       <SectionTitle
@@ -14,14 +18,19 @@ const FormVoiture: FC<{
         text={type === 'add' ? 'Ajout de voiture' : 'Modifier la voiture'}
       />
       <View>
-        <MyTextInput value="" placeholder="Designation" />
         <MyTextInput
-          value=""
+          value={value.designation}
+          placeholder="Designation"
+          onChange={(text) => onChange('designation', text)}
+        />
+        <MyTextInput
+          value={String(value.loyer)}
           placeholder="Loyer journalier"
           keyboardType="numeric"
+          onChange={(text) => onChange('loyer', text)}
         />
         <Button
-          onPress={function () {}}
+          onPress={submit}
           title={type === 'add' ? 'ajouter' : 'modifier'}
           color={themes.colors.secondary}
         />

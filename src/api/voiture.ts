@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../configs';
+import {IFormVoiture} from '../types';
 
 const URL = BASE_URL + '/voiture';
 
@@ -11,19 +12,11 @@ export const getVoitureById = (id: number) => {
   return axios.get(`${URL}/find/${id}`);
 };
 
-export interface ICreateVoitureData {
-  designation: string;
-  loyer: number;
-}
-export const createVoiture = (data: ICreateVoitureData) => {
+export const createVoiture = (data: IFormVoiture) => {
   return axios.post(`${URL}`, data);
 };
 
-export interface IUpdateVoitureData {
-  designation: string;
-  loyer: string;
-}
-export const udpateVoiture = (id: number, data: IUpdateVoitureData) => {
+export const udpateVoiture = (id: number, data: IFormVoiture) => {
   return axios.put(`${URL}/${id}`, data);
 };
 

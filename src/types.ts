@@ -11,3 +11,5 @@ export interface IVoiture {
   designation: string;
   loyer: number;
 }
+
+export type IFormVoiture = Omit<IVoiture, 'idVoiture'>;

@@ -5,7 +5,11 @@ import PageContainer from '../components/public/PageContainer';
 const UpdateVoitureScreen: FC = () => {
   return (
     <PageContainer>
-      <UpdateVoiture />
+      <UpdateVoiture
+        value={{designation: '', loyer: 0}}
+        submit={() => {}}
+        onChange={() => {}}
+      />
     </PageContainer>
   );
 };

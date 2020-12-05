@@ -9,6 +9,7 @@ interface IState {
 
 interface IActions {
   setVoitures: (voitures: IVoiture[]) => void;
+  addVoiture: (voiture: IVoiture) => void;
 }
 
 interface IContext {
@@ -29,6 +30,11 @@ export const VoitureProvider: FC = ({children}) => {
       setVoitures(voitures) {
         setState((draft) => {
           draft.voitures = voitures;
+        });
+      },
+      addVoiture(voiture) {
+        setState((draft) => {
+          draft.voitures.unshift(voiture);
         });
       },
     },
