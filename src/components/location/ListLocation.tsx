@@ -1,4 +1,4 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -44,9 +44,10 @@ const ListItem: FC<{
   );
 };
 
-const ListLocation: FC = () => {
+const ListLocation: FC<{
+  voiture: IVoiture;
+}> = ({voiture}) => {
   const {state} = useLocationCtx();
-  const voiture = useRoute().params as IVoiture;
 
   const renderItem = ({item}: {item: ILocation}) => {
     return <ListItem item={item} />;

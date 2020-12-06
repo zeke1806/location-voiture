@@ -7,9 +7,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddLocation from '../components/location/AddLocation';
 import Space from '../components/public/Space';
 import ListLocation from '../components/location/ListLocation';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {IVoiture} from '../types';
 
 const ManageLocationScreen: FC = () => {
+  const voiture = useRoute().params as IVoiture;
   const {navigate} = useNavigation();
 
   const navigateToStat = useCallback(() => {
@@ -19,7 +21,10 @@ const ManageLocationScreen: FC = () => {
   return (
     <PageContainer>
       <View style={tailwind('flex-row justify-between pt-1 px-1')}>
-        <Text>Nissan numero xxx a xxxxAr par jour</Text>
+        <Text>
+          {voiture.designation.toUpperCase()} numero {voiture.idVoiture} a{' '}
+          {voiture.loyer}Ar par jour
+        </Text>
         <Ionicons
           name="stats-chart"
           size={themes.space * 2}
@@ -30,7 +35,7 @@ const ManageLocationScreen: FC = () => {
 
       <AddLocation />
       <Space />
-      <ListLocation />
+      <ListLocation voiture={voiture} />
     </PageContainer>
   );
 };
