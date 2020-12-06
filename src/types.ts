@@ -13,3 +13,10 @@ export interface IVoiture {
 }
 
 export type IFormVoiture = Omit<IVoiture, 'idVoiture'>;
+
+export type ILocation = ILocataire &
+  IVoiture & {
+    idLouer: number;
+    date: string;
+    nbJour: number;
+  };

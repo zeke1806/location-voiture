@@ -1,34 +1,15 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useLocationCtx} from '../../store/location';
 import themes from '../../theme';
+import {ILocation, IVoiture} from '../../types';
 import SectionTitle from '../public/SectionTitle';
 
-const DATA = [
-  {
-    locataire: 'Rabe',
-    date: Date.now().toString(),
-    nbJour: '25',
-    montant: '2000',
-  },
-  {
-    locataire: 'Rakoto',
-    date: Date.now().toString(),
-    nbJour: '12',
-    montant: '7000',
-  },
-  {
-    locataire: 'Randria',
-    date: Date.now().toString(),
-    nbJour: '30',
-    montant: '25000',
-  },
-];
-
 const ListItem: FC<{
-  item: typeof DATA[0];
+  item: ILocation;
 }> = ({item}) => {
   const navigation = useNavigation();
 
@@ -47,10 +28,10 @@ const ListItem: FC<{
           style={tailwind('mr-5')}
         />
         <View>
-          <Text>Locataire: {item.locataire}</Text>
+          <Text>Locataire: {item.nom}</Text>
           <Text>Date: {item.date}</Text>
           <Text>Nb jour: {item.nbJour}</Text>
-          <Text>Montant: {item.montant}</Text>
+          <Text>Montant: {item.loyer}</Text>
         </View>
       </View>
       <Ionicons
@@ -64,17 +45,24 @@ const ListItem: FC<{
 };
 
 const ListLocation: FC = () => {
-  const renderItem = ({item}: {item: typeof DATA[0]}) => {
+  const {state} = useLocationCtx();
+  const voiture = useRoute().params as IVoiture;
+
+  const renderItem = ({item}: {item: ILocation}) => {
     return <ListItem item={item} />;
   };
+
+  const voitureLocations = state.locations.filter(
+    (loc) => loc.idVoiture === voiture.idVoiture,
+  );
 
   return (
     <View>
       <SectionTitle iconName="list" text="Liste de location" />
       <FlatList
-        data={DATA}
+        data={voitureLocations}
         renderItem={renderItem}
-        keyExtractor={(item) => item.locataire}
+        keyExtractor={(item) => String(item.idLouer)}
       />
     </View>
   );

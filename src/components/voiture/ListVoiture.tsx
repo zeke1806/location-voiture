@@ -21,7 +21,7 @@ const ListItem: FC<{
     if (!modeLocation) {
       navigation.navigate('update-voiture', item);
     } else {
-      navigation.navigate('manage-location');
+      navigation.navigate('manage-location', item);
     }
   };
 
