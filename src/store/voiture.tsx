@@ -13,6 +13,7 @@ interface IActions {
   addVoiture: (voiture: IVoiture) => void;
   updateVoiture: (voiture: IVoiture) => void;
   handleChangeSearch: (search: string) => void;
+  deleteVoiture: (id: number) => void;
 }
 
 interface IContext {
@@ -58,6 +59,15 @@ export const VoitureProvider: FC = ({children}) => {
       handleChangeSearch(search) {
         setState((draft) => {
           draft.search = search;
+        });
+      },
+
+      deleteVoiture(id) {
+        setState((draft) => {
+          draft.voitures.splice(
+            draft.voitures.findIndex((elt) => elt.idVoiture === id),
+            1,
+          );
         });
       },
     },

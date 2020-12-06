@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useDeleteVoiture} from '../../services/deleteVoiture';
 import {useGetVoitures} from '../../services/getVoitures';
 import {useVoitureCtx} from '../../store/voiture';
 import themes from '../../theme';
@@ -13,6 +14,7 @@ const ListItem: FC<{
   item: IVoiture;
   modeLocation: boolean;
 }> = ({item, modeLocation}) => {
+  const {submit} = useDeleteVoiture(item.idVoiture);
   const navigation = useNavigation();
 
   const navigateToUpdate = () => {
@@ -45,6 +47,7 @@ const ListItem: FC<{
           size={themes.space * 2}
           style={tailwind('mr-5')}
           color="red"
+          onPress={submit}
         />
       ) : (
         <View>
