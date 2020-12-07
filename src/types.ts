@@ -20,3 +20,7 @@ export type ILocation = ILocataire &
     date: string;
     nbJour: number;
   };
+
+export type IVoitureNbLocation = IVoiture & {
+  nbLocation: number;
+};

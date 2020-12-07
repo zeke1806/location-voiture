@@ -7,11 +7,13 @@ import {useDeleteVoiture} from '../../services/deleteVoiture';
 import {useGetVoitures} from '../../services/getVoitures';
 import {useVoitureCtx} from '../../store/voiture';
 import themes from '../../theme';
-import {IVoiture} from '../../types';
+import {IVoitureNbLocation} from '../../types';
 import SectionTitle from '../public/SectionTitle';
+import {useGetLocations} from '../../services/getLocations';
+import {useLocationCtx} from '../../store/location';
 
 const ListItem: FC<{
-  item: IVoiture;
+  item: IVoitureNbLocation;
   modeLocation: boolean;
 }> = ({item, modeLocation}) => {
   const {submit} = useDeleteVoiture(item.idVoiture);
@@ -56,7 +58,9 @@ const ListItem: FC<{
               tailwind('p-2 rounded-full border-opacity-0'),
               {backgroundColor: themes.colors.secondary},
             ]}>
-            <Text style={tailwind('text-white font-bold')}>Nb location: 0</Text>
+            <Text style={tailwind('text-white font-bold')}>
+              Nb location: {item.nbLocation}
+            </Text>
           </View>
         </View>
       )}
@@ -68,17 +72,27 @@ const ListVoiture: FC<{
   modeLocation: boolean;
 }> = ({modeLocation}) => {
   useGetVoitures();
+  useGetLocations();
   const {filteredVoitures} = useVoitureCtx();
+  const {state} = useLocationCtx();
 
-  const renderItem = ({item}: {item: IVoiture}) => {
+  const renderItem = ({item}: {item: IVoitureNbLocation}) => {
     return <ListItem item={item} modeLocation={modeLocation} />;
   };
+
+  const voitureNbLocation: IVoitureNbLocation[] = filteredVoitures.map((v) => {
+    return {
+      ...v,
+      nbLocation: state.locations.filter((elt) => elt.idVoiture === v.idVoiture)
+        .length,
+    };
+  });
 
   return (
     <>
       <SectionTitle iconName="list" text="Liste de voiture" />
       <FlatList
-        data={filteredVoitures}
+        data={voitureNbLocation}
         renderItem={renderItem}
         keyExtractor={(item) => String(item.idVoiture)}
       />
