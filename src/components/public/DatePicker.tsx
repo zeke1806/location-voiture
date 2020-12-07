@@ -7,7 +7,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const DatePicker: FC<{
   placeholder: string;
-}> = ({placeholder}) => {
+  value: string;
+  onChange: (date: string) => void;
+}> = ({placeholder, onChange, value}) => {
   const [showDate, setShowDate] = useState(false);
 
   return (
@@ -19,15 +21,16 @@ const DatePicker: FC<{
           onPress={() => setShowDate(true)}
         />
         {'    '}
-        {placeholder}
+        {value || placeholder}
       </Text>
       {showDate && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={new Date()}
+          value={new Date(value)}
           is24Hour={true}
           display="default"
-          onChange={function () {
+          onChange={function (e, selectedDate) {
+            onChange(selectedDate ? selectedDate.toISOString() : value);
             setShowDate(false);
           }}
         />

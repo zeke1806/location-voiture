@@ -24,3 +24,10 @@ export type ILocation = ILocataire &
 export type IVoitureNbLocation = IVoiture & {
   nbLocation: number;
 };
+
+export interface IFormLocation {
+  locataire_id: number;
+  voiture_id: number;
+  nbJour: number;
+  date: string; // annee-moi-jour 2005-09-12T21
+}

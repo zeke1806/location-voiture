@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../configs';
+import {IFormLocation} from '../types';
 
 const URL = BASE_URL + '/location';
 
@@ -11,23 +12,11 @@ export const getLocationById = (id: number) => {
   return axios.get(`${URL}/${id}`);
 };
 
-export interface ICreateLocationData {
-  locataire_id: number;
-  voiture_id: number;
-  nbJour: number;
-  date: string; // annee-moi-jour 2005-09-12T21
-}
-export const createLocation = (data: ICreateLocationData) => {
+export const createLocation = (data: IFormLocation) => {
   return axios.post(`${URL}`, data);
 };
 
-export interface IUpdateLocationData {
-  locataire_id: number;
-  voiture_id: number;
-  nbJour: number;
-  date: string;
-}
-export const udpateLocation = (id: number, data: IUpdateLocationData) => {
+export const udpateLocation = (id: number, data: IFormLocation) => {
   return axios.put(`${URL}/${id}`, data);
 };
 

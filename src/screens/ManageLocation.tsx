@@ -33,7 +33,7 @@ const ManageLocationScreen: FC = () => {
         />
       </View>
 
-      <AddLocation />
+      <AddLocation voiture={voiture} />
       <Space />
       <ListLocation voiture={voiture} />
     </PageContainer>
