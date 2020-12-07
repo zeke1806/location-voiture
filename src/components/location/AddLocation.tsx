@@ -6,8 +6,15 @@ import FormLocation from './FormLocation';
 const AddLocation: FC<{
   voiture: IVoiture;
 }> = ({voiture}) => {
-  const {form, handleChange} = useAddLocation(voiture.idVoiture);
-  return <FormLocation type="add" value={form} onChange={handleChange} />;
+  const {form, handleChange, submit} = useAddLocation(voiture.idVoiture);
+  return (
+    <FormLocation
+      type="add"
+      value={form}
+      onChange={handleChange}
+      submit={submit}
+    />
+  );
 };
 
 export default AddLocation;

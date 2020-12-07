@@ -58,14 +58,14 @@ const ListLocation: FC<{
   );
 
   return (
-    <View>
+    <>
       <SectionTitle iconName="list" text="Liste de location" />
       <FlatList
         data={voitureLocations}
         renderItem={renderItem}
         keyExtractor={(item) => String(item.idLouer)}
       />
-    </View>
+    </>
   );
 };
 

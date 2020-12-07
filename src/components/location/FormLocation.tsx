@@ -14,7 +14,8 @@ const FormLocation: FC<{
   type: 'add' | 'update';
   value: IFormLocation;
   onChange: (key: keyof IFormLocation, value: string) => void;
-}> = ({type, onChange, value}) => {
+  submit: () => void;
+}> = ({type, onChange, value, submit}) => {
   useGetLocataires();
   const {
     state: {locataires},
@@ -65,7 +66,7 @@ const FormLocation: FC<{
         </View>
 
         <Button
-          onPress={function () {}}
+          onPress={submit}
           title={type === 'add' ? 'ajouter' : 'modifier'}
           color={themes.colors.secondary}
         />
