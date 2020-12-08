@@ -10,6 +10,7 @@ interface IState {
 interface IActions {
   setLocations: (locations: ILocation[]) => void;
   addLocation: (location: ILocation) => void;
+  delLocation: (id: number) => void;
 }
 
 interface IContext {
@@ -36,6 +37,15 @@ export const LocationProvider: FC = ({children}) => {
       addLocation(location) {
         setState((draft) => {
           draft.locations.unshift(location);
+        });
+      },
+
+      delLocation(id) {
+        setState((draft) => {
+          draft.locations.splice(
+            draft.locations.findIndex((elt) => elt.idLouer === id),
+            1,
+          );
         });
       },
     },

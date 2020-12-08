@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import tailwind from 'tailwind-rn';
+import {useDelLocation} from '../../services/delLocation';
 import {useLocationCtx} from '../../store/location';
 import themes from '../../theme';
 import {ILocation, IVoiture} from '../../types';
@@ -12,6 +13,7 @@ const ListItem: FC<{
   item: ILocation;
 }> = ({item}) => {
   const navigation = useNavigation();
+  const {submit} = useDelLocation(item.idLouer);
 
   const navigateToUpdate = () => {
     navigation.navigate('update-location');
@@ -39,6 +41,7 @@ const ListItem: FC<{
         size={themes.space * 2}
         style={tailwind('mr-5')}
         color="red"
+        onPress={submit}
       />
     </TouchableOpacity>
   );
