@@ -30,20 +30,16 @@ export const useAddLocation = (voiture_id: number) => {
   };
 
   const submit = async () => {
-    const data = {
+    const result = await createLocation({
       ...form,
       date: dayjs(form.date).format('YYYY-MM-DD'), //2005-09-12T21
-    };
-    console.log(data);
-    const result = await createLocation(data);
+    });
     actions.addLocation({
       ...result.data,
       idLouer: result.data.id,
       idLocataire: result.data.locataire_id,
       idVoiture: result.data.voiture_id,
-      loyer:
-        voitures.find((elt) => elt.idVoiture === voiture_id)!.loyer *
-        result.data.nbJour,
+      loyer: voitures.find((elt) => elt.idVoiture === voiture_id)!.loyer,
     });
   };
 

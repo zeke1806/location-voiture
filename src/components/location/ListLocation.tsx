@@ -53,9 +53,12 @@ const ListLocation: FC<{
     return <ListItem item={item} />;
   };
 
-  const voitureLocations = state.locations.filter(
-    (loc) => loc.idVoiture === voiture.idVoiture,
-  );
+  const voitureLocations = state.locations
+    .filter((loc) => loc.idVoiture === voiture.idVoiture)
+    .map((loc) => ({
+      ...loc,
+      loyer: loc.loyer * loc.nbJour,
+    }));
 
   return (
     <>
