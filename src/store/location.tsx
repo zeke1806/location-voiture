@@ -11,6 +11,7 @@ interface IActions {
   setLocations: (locations: ILocation[]) => void;
   addLocation: (location: ILocation) => void;
   delLocation: (id: number) => void;
+  updateLocation: (location: ILocation) => void;
 }
 
 interface IContext {
@@ -45,6 +46,18 @@ export const LocationProvider: FC = ({children}) => {
           draft.locations.splice(
             draft.locations.findIndex((elt) => elt.idLouer === id),
             1,
+          );
+        });
+      },
+
+      updateLocation(location) {
+        setState((draft) => {
+          draft.locations.splice(
+            draft.locations.findIndex(
+              (elt) => elt.idLouer === location.idLouer,
+            ),
+            1,
+            location,
           );
         });
       },

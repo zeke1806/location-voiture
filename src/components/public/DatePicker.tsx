@@ -4,7 +4,7 @@ import tailwind from 'tailwind-rn';
 import themes from '../../theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import dayjs from 'dayjs';
+import {formatDate} from '../../utils';
 
 const DatePicker: FC<{
   placeholder: string;
@@ -12,8 +12,6 @@ const DatePicker: FC<{
   onChange: (date: string) => void;
 }> = ({placeholder, onChange, value}) => {
   const [showDate, setShowDate] = useState(false);
-
-  const format = (date: string) => dayjs(date).format('DD/MM/YYYY');
 
   return (
     <>
@@ -24,7 +22,7 @@ const DatePicker: FC<{
           onPress={() => setShowDate(true)}
         />
         {'    '}
-        {value ? format(value) : placeholder}
+        {value ? formatDate(value) : placeholder}
       </Text>
       {showDate && (
         <DateTimePicker

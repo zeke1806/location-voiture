@@ -7,6 +7,7 @@ import {useDelLocation} from '../../services/delLocation';
 import {useLocationCtx} from '../../store/location';
 import themes from '../../theme';
 import {ILocation, IVoiture} from '../../types';
+import {formatDate} from '../../utils';
 import SectionTitle from '../public/SectionTitle';
 
 const ListItem: FC<{
@@ -16,7 +17,7 @@ const ListItem: FC<{
   const {submit} = useDelLocation(item.idLouer);
 
   const navigateToUpdate = () => {
-    navigation.navigate('update-location');
+    navigation.navigate('update-location', item);
   };
 
   return (
@@ -31,7 +32,7 @@ const ListItem: FC<{
         />
         <View>
           <Text>Locataire: {item.nom}</Text>
-          <Text>Date: {item.date}</Text>
+          <Text>Date: {formatDate(item.date)}</Text>
           <Text>Nb jour: {item.nbJour}</Text>
           <Text>Montant: {item.loyer}</Text>
         </View>
