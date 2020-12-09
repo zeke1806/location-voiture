@@ -9,6 +9,7 @@ import SectionTitle from '../components/public/SectionTitle';
 import {useDateSegCtx} from '../store/dateSeg';
 import {useLocationCtx} from '../store/location';
 import {IVoiture} from '../types';
+import dayjs from 'dayjs';
 
 const StatLocationScreen: FC = () => {
   const voiture = useRoute().params as IVoiture;
@@ -24,11 +25,15 @@ const StatLocationScreen: FC = () => {
       if (debut === fin) {
         return required;
       }
-      const locationDate = new Date(elt.date).getTime();
-      const debutDate = new Date(debut).getTime();
-      const finDate = new Date(fin).getTime();
+      const locationDate = dayjs(elt.date);
+      const debutDate = dayjs(debut);
+      const finDate = dayjs(fin);
 
-      return required && debutDate <= locationDate && finDate >= locationDate;
+      return (
+        required &&
+        locationDate.isAfter(debutDate) &&
+        locationDate.isBefore(finDate)
+      );
     }
     return required;
   });
