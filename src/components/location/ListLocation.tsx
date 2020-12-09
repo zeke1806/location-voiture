@@ -34,7 +34,7 @@ const ListItem: FC<{
           <Text>Locataire: {item.nom}</Text>
           <Text>Date: {formatDate(item.date)}</Text>
           <Text>Nb jour: {item.nbJour}</Text>
-          <Text>Montant: {item.loyer}</Text>
+          <Text>Montant: {item.loyer} Ar</Text>
         </View>
       </View>
       <Ionicons

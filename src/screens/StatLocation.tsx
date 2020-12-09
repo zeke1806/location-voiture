@@ -26,8 +26,8 @@ const StatLocationScreen: FC = () => {
         return required;
       }
       const locationDate = dayjs(elt.date);
-      const debutDate = dayjs(debut);
-      const finDate = dayjs(fin);
+      const debutDate = dayjs(debut).subtract(1, 'day');
+      const finDate = dayjs(fin).add(1, 'day');
 
       return (
         required &&
@@ -73,7 +73,7 @@ const StatLocationScreen: FC = () => {
         />
         <SectionTitle
           iconName="cash"
-          text={`Montant totale: ${montantTotal}`}
+          text={`Montant totale: ${montantTotal} Ar`}
         />
       </View>
 
