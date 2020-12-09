@@ -18,9 +18,10 @@ interface IContext {
 const Context = createContext<IContext | undefined>(undefined);
 
 export const DateSegProvider: FC = ({children}) => {
+  const defaultDate = new Date().toISOString();
   const [state, setState] = useImmer<IState>({
-    debut: new Date().toISOString(),
-    fin: '',
+    debut: defaultDate,
+    fin: defaultDate,
   });
 
   const contextValue: IContext = {

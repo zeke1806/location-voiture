@@ -13,17 +13,29 @@ import {IVoiture} from '../types';
 const StatLocationScreen: FC = () => {
   const voiture = useRoute().params as IVoiture;
   const {state: locationState} = useLocationCtx();
-  const {state, actions} = useDateSegCtx();
+  const {
+    state: {debut, fin},
+    actions,
+  } = useDateSegCtx();
 
-  const voitureLocations = locationState.locations.filter(
-    (elt) => elt.idVoiture === voiture.idVoiture,
-  );
+  const voitureLocations = locationState.locations.filter((elt) => {
+    const required = elt.idVoiture === voiture.idVoiture;
+    if (debut && fin) {
+      if (debut === fin) {
+        return required;
+      }
+      const locationDate = new Date(elt.date).getTime();
+      const debutDate = new Date(debut).getTime();
+      const finDate = new Date(fin).getTime();
+
+      return required && debutDate <= locationDate && finDate >= locationDate;
+    }
+    return required;
+  });
 
   const montantTotal = voitureLocations.reduce((acc, cur) => {
     const locationMontant = cur.loyer * cur.nbJour;
-    console.log({
-      cur,
-    });
+
     return acc + locationMontant;
   }, 0);
 
@@ -39,12 +51,12 @@ const StatLocationScreen: FC = () => {
       <View style={tailwind('flex-row justify-around mt-2')}>
         <DatePicker
           placeholder="Debut"
-          value={state.debut}
+          value={debut}
           onChange={(value) => actions.setDate('debut', value)}
         />
         <DatePicker
           placeholder="Fin"
-          value={state.fin}
+          value={fin}
           onChange={(value) => actions.setDate('fin', value)}
         />
       </View>
