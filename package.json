@@ -19,6 +19,7 @@
     "axios": "^0.21.0",
     "dayjs": "^1.9.7",
     "immer": "^8.0.0",
+    "randomcolor": "^0.6.2",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-chart-kit": "^6.7.0",

@@ -15,8 +15,8 @@ const ManageLocationScreen: FC = () => {
   const {navigate} = useNavigation();
 
   const navigateToStat = useCallback(() => {
-    navigate('stat-location');
-  }, [navigate]);
+    navigate('stat-location', voiture);
+  }, [navigate, voiture]);
 
   return (
     <PageContainer>

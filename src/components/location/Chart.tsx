@@ -2,45 +2,47 @@ import React, {FC} from 'react';
 import {Dimensions, View} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 import tailwind from 'tailwind-rn';
+//@ts-ignore
+import randomcolor from 'randomcolor';
+import {useVoitureCtx} from '../../store/voiture';
+import {useLocationCtx} from '../../store/location';
+import {ILocation} from '../../types';
+
+interface IData {
+  name: string;
+  population: number;
+  color: string;
+  legendFontColor: string;
+  legendFontSize: number;
+}
 
 const Chart: FC = () => {
-  const data = [
-    {
-      name: 'Seoul',
-      population: 21500000,
-      color: 'rgba(131, 167, 234, 1)',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'Toronto',
-      population: 2800000,
-      color: '#F00',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'Beijing',
-      population: 527612,
-      color: 'red',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'New York',
-      population: 8538000,
-      color: '#ffffff',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'Moscow',
-      population: 11920000,
-      color: 'rgb(0, 0, 255)',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-  ];
+  const {
+    state: {voitures},
+  } = useVoitureCtx();
+  const {
+    state: {locations},
+  } = useLocationCtx();
+
+  const generateData = (): IData[] => {
+    return locations
+      .reduce((acc, cur) => {
+        if (!acc.find((elt) => elt.idVoiture === cur.idVoiture)) {
+          acc.push(cur);
+        }
+        return acc;
+      }, [] as ILocation[])
+      .map((l) => ({
+        name: voitures.find((elt) => elt.idVoiture === l.idVoiture)!
+          .designation,
+        population: locations.filter((elt) => elt.idVoiture === l.idVoiture)
+          .length,
+        color: randomcolor(),
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      }));
+  };
+
   const chartConfig = {
     backgroundColor: '#e26a00',
     backgroundGradientFrom: '#fb8c00',
@@ -57,10 +59,11 @@ const Chart: FC = () => {
       stroke: '#ffa726',
     },
   };
+
   return (
     <View style={tailwind('items-center')}>
       <PieChart
-        data={data}
+        data={generateData()}
         width={Dimensions.get('screen').width}
         height={220}
         chartConfig={chartConfig}
